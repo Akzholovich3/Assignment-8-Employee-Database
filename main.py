@@ -1,16 +1,45 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# main.py
+from employee import Employee
+from employeeDAO import EmployeeDAO
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def main():
+    dao = EmployeeDAO()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    # Create and insert a new employee
+    emp1 = Employee(name="Mederbek Suiunbekov", position="Devops Engineer", salary=75000.0, hire_date="2025-01-01")
+    emp_id = dao.insert(emp1)
+    print(f"Inserted employee with ID: {emp_id}")
+
+    # Get employee by ID
+    employee = dao.get_by_id(emp_id)
+    print("\nRetrieved employee by ID:")
+    print(employee)
+
+    # Get all employees
+    print("\nAll employees:")
+    employees = dao.get_all()
+    for emp in employees:
+        print(emp)
+
+    # Update employee
+    employee.name = "Meder Suiun uulu"
+    employee.set_salary(80000.0)
+    dao.update(employee)
+    print("\nAfter update:")
+    updated_emp = dao.get_by_id(emp_id)
+    print(updated_emp)
+
+    # Delete employee
+    dao.delete(emp_id)
+    print("\nAfter deletion:")
+    employees = dao.get_all()
+    print("Remaining employees count:", len(employees))
+
+    # Explicitly close the connection
+    dao.close()
+
+
+if __name__ == "__main__":
+    main()
+    

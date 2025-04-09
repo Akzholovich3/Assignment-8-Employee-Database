@@ -1,4 +1,3 @@
-# employee.py
 class Employee:
     def __init__(self, id=None, name="", position="", salary=0.0, hire_date=""):
         self.id = id
